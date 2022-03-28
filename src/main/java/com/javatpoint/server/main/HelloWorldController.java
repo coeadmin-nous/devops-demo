@@ -1,8 +1,10 @@
 package com.javatpoint.server.main;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 //Controller
 @RestController
+@RequestMapping("/api")
 public class HelloWorldController 
 {
 //using get method and hello-world URI
