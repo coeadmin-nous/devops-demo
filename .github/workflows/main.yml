@@ -13,23 +13,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: "12.x" 
-    # Required installation
+    # Required installationnn
     - run: npm install swaggerhub-cli -g && npm install fs && npm install xml2js && npm install js-yaml  
-   
+    # run
     - run: 
-        export API_VERSION=$(node ././bin/readfile.js) &&
-        swaggerhub api:update nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION --file ././src/main/resources/api/demo-crud-project.json --visibility public
-       || swaggerhub api:create nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION --file ././src/main/resources/api/demo-crud-project.json --visibility public
+        export API_VERSION=$(node readfile.js) &&
+        swaggerhub api:update nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION --file ././src/main/resources/api/${GITHUB_REPOSITORY#*/}.yaml --visibility public
+       || swaggerhub api:create nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION --file ././src/main/resources/api/${GITHUB_REPOSITORY#*/}.yaml --visibility public
         
         swaggerhub api:setdefault "nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION"
-        
       env: 
-          SWAGGERHUB_API_KEY: ${swaggerhub API Key}
+          SWAGGERHUB_API_KEY: 4894a72a-3f04-4461-9ceb-31564ae7206f
       if: github.ref == 'refs/heads/dev'
     - run: 
         export API_VERSION=$(node readfile.js) &&
         swaggerhub api:publish nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION 
-        
       env: 
-          SWAGGERHUB_API_KEY: ${swaggerhub API Key}
+          SWAGGERHUB_API_KEY: ${swagger-api-key}
       if: github.ref == 'refs/heads/main'
