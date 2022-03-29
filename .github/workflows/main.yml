@@ -17,7 +17,7 @@ jobs:
     - run: npm install swaggerhub-cli -g && npm install fs && npm install xml2js && npm install js-yaml  
     # run
     - run: 
-        export API_VERSION=$(node ./readfile.js) &&
+        export API_VERSION=$(node ./workflows/readfile.js) &&
         swaggerhub api:update nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION --file ././src/main/resources/api/${GITHUB_REPOSITORY#*/}.yaml --visibility public
        || swaggerhub api:create nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION --file ././src/main/resources/api/${GITHUB_REPOSITORY#*/}.yaml --visibility public
         
@@ -26,7 +26,7 @@ jobs:
           SWAGGERHUB_API_KEY: 4894a72a-3f04-4461-9ceb-31564ae7206f
       if: github.ref == 'refs/heads/dev'
     - run: 
-        export API_VERSION=$(node readfile.js) &&
+        export API_VERSION=$(node ./workflows/readfile.js) &&
         swaggerhub api:publish nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION 
       env: 
           SWAGGERHUB_API_KEY: ${swagger-api-key}
