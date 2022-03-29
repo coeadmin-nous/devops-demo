@@ -27,7 +27,7 @@ jobs:
           SWAGGERHUB_API_KEY: ${swaggerhub API Key}
       if: github.ref == 'refs/heads/dev'
     - run: 
-        export API_VERSION=$(node ././bin/readfile.js) &&
+        export API_VERSION=$(node readfile.js) &&
         swaggerhub api:publish nouggg/${GITHUB_REPOSITORY#*/}/$API_VERSION 
         
       env: 
